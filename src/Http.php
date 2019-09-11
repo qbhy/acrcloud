@@ -19,16 +19,20 @@ class Http extends \Hanson\Foundation\Http
         $this->dataType = $dataType;
     }
 
+    public function getDataTypeString()
+    {
+        return $this->dataType ? $this->dataType . "\n" : '';
+    }
+
     public function request($method, $url, $options = [])
     {
         $method    = strtoupper($method);
-        $accessKey = $this->app->getConfig('access_key');
-        $secretKey = $this->app->getConfig('secret_key');
-//        $dataType         = $this->dataType;
+        $accessKey = $this->app->getConfig('console_access_key');
+        $secretKey = $this->app->getConfig('console_secret_key');
         $timestamp        = time();
         $uri              = $url;
         $signatureVersion = $this->signatureVersion;
-        $signatureString  = $method . "\n" . $uri . "\n" . $accessKey . "\n" . $signatureVersion . "\n" . $timestamp;
+        $signatureString  = $method . "\n" . $uri . "\n" . $accessKey . "\n" . $this->getDataTypeString() . $signatureVersion . "\n" . $timestamp;
         $signature        = base64_encode(hash_hmac("sha1", $signatureString, $secretKey, true));
 
         $options['headers'] = array_merge($options['headers'] ?? [], [

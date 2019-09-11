@@ -7,6 +7,7 @@ use Qbhy\AcrCloud\Resources\Audio;
 use Qbhy\AcrCloud\Resources\Bucket;
 use Qbhy\AcrCloud\Resources\Channel;
 use Qbhy\AcrCloud\Resources\ChannelPlayback;
+use Qbhy\AcrCloud\Resources\Identification;
 use Qbhy\AcrCloud\Resources\Monitor;
 use Qbhy\AcrCloud\Resources\Project;
 
@@ -19,6 +20,7 @@ use Qbhy\AcrCloud\Resources\Project;
  * @property-read ChannelPlayback $channel_playback
  * @property-read Monitor         $monitor
  * @property-read Project         $project
+ * @property-read Identification  $identification
  *
  * @package Qbhy\AcrCloud
  */

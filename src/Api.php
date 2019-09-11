@@ -15,7 +15,7 @@ abstract class Api extends AbstractAPI
      */
     protected $http;
 
-    protected $dataType = "audio";
+    protected $dataType;
 
     public function __construct(AcrCloud $app)
     {
@@ -29,9 +29,9 @@ abstract class Api extends AbstractAPI
 
     public function getHttp()
     {
-        return $this->http !== null ? $this->http : $this->http = (new Http($this->app, $this->getDataType()))->setClient(new Client([
-            'base_uri' => $this->app->getConfig('host'),
-        ]));
+        return $this->http ?? $this->http = (new Http($this->app, $this->getDataType()))->setClient(new Client([
+                'base_uri' => $this->app->getConfig('console_host'),
+            ]));
     }
 
     /**
