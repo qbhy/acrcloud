@@ -1,0 +1,28 @@
+{
+  "name": "96qbhy/acrcloud",
+  "description": "acrcloud php sdk,支持laravel/lumen",
+  "keywords": [
+    "laravel",
+    "acr",
+    "acrclound",
+    "lumen"
+  ],
+  "authors": [
+    {
+      "name": "qbhy",
+      "email": "96qbhy@gmail.com"
+    }
+  ],
+  "require": {
+    "hanson/foundation-sdk": "^3.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Qbhy\\AcrCloud\\": "src"
+    }
+  },
+  "require-dev": {
+    "laravel/framework": "^6.0"
+  }
+}
