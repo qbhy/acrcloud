@@ -29,9 +29,7 @@ abstract class Api extends AbstractAPI
 
     public function getHttp()
     {
-        return $this->http ?? $this->http = (new Http($this->app, $this->getDataType()))->setClient(new Client([
-                'base_uri' => $this->app->getConfig('console_host'),
-            ]));
+        return $this->http ?? $this->http = (new Http($this));
     }
 
     /**
@@ -41,5 +39,20 @@ abstract class Api extends AbstractAPI
     public static function decodeResponse(ResponseInterface $response)
     {
         return @json_decode($response->getBody()->__toString(), true);
+    }
+
+    public function getHost()
+    {
+        return $this->app->getConfig('console_host');
+    }
+
+    public function getAccessKey()
+    {
+        return $this->app->getConfig('console_access_key');
+    }
+
+    public function getSecretKey()
+    {
+        return $this->app->getConfig('console_secret_key');
     }
 }
