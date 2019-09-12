@@ -24,5 +24,12 @@
   },
   "require-dev": {
     "laravel/framework": "^6.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Qbhy\\AcrCloud\\LaravelServiceProvider"
+      ]
+    }
   }
 }
