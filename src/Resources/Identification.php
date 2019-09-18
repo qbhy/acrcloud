@@ -13,11 +13,22 @@ class Identification extends Api
      * @param $sample '文件
      * @return array|null
      */
-    public function query($sample)
+    public function query($sample, $title)
     {
         return self::decodeResponse(
-            $this->getHttp()->upload('/v1/identify', [], ['sample' => $sample], ['data_type' => $this->dataType])
+            $this->getHttp()->upload('/v1/identify', [], ['sample' => $sample], [
+                'data_type'    => $this->dataType,
+                'sample_bytes' => filesize($sample),
+                'title'        => $title,
+            ])
         );
+    }
+
+    public function handleAuthMetadata(array &$options, array $authMetadata)
+    {
+        foreach ($authMetadata as $name => $contents) {
+            $options['multipart'][] = compact('name', 'contents');
+        }
     }
 
     public function use($project)
