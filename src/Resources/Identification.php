@@ -2,7 +2,6 @@
 
 namespace Qbhy\AcrCloud\Resources;
 
-use http\Exception\InvalidArgumentException;
 use Qbhy\AcrCloud\Api;
 
 class Identification extends Api
