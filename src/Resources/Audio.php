@@ -18,7 +18,7 @@ class Audio extends Api
      */
     public function upload($file, $id, $bucket, $title, $extras = [], $dataType = 'audio')
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->upload('/v1/audios', [], [
                 'audio_file' => $file,
             ], [
@@ -41,7 +41,7 @@ class Audio extends Api
      */
     public function getAll($bucket, $page = 1)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/audios', [
                 'bucket_name' => $bucket,
                 'page'        => $page
@@ -57,7 +57,7 @@ class Audio extends Api
      */
     public function find($acrId)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/audios/' . $acrId)
         );
     }
@@ -70,7 +70,7 @@ class Audio extends Api
      */
     public function delete($acrId)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->delete('/v1/audios/' . $acrId)
         );
     }

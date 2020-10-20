@@ -16,7 +16,7 @@ class Project extends Api
      */
     public function add($type, array $buckets, $audioType, $externalId, $region = 'ap-southeast-1')
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->json('/v1/projects', [
                 'type'        => $type,
                 'buckets'     => $buckets,
@@ -34,7 +34,7 @@ class Project extends Api
      */
     public function update($name, array $buckets)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->json('/v1/projects/' . $name, [
                 'buckets'     => $buckets,
             ])
@@ -47,7 +47,7 @@ class Project extends Api
      */
     public function delete($name)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->delete('/v1/projects/' . $name)
         );
     }

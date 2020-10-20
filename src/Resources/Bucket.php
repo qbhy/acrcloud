@@ -16,7 +16,7 @@ class Bucket extends Api
      */
     public function add($name, $scale, $type = 'File', $contentType = 'Music', $region = 'ap-southeast-1')
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->post('/v1/buckets', [
                 'name'         => $name,
                 'scale'        => $scale,
@@ -33,7 +33,7 @@ class Bucket extends Api
      */
     public function getAll()
     {
-        return self::decodeResponse($this->getHttp()->get('/v1/buckets'));
+        return $this->app->decodeResponse($this->getHttp()->get('/v1/buckets'));
     }
 
     /**
@@ -43,6 +43,6 @@ class Bucket extends Api
      */
     public function delete($bucket)
     {
-        return self::decodeResponse($this->getHttp()->delete('/v1/buckets/' . $bucket));
+        return $this->app->decodeResponse($this->getHttp()->delete('/v1/buckets/' . $bucket));
     }
 }

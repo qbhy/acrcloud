@@ -3,6 +3,7 @@
 namespace Qbhy\AcrCloud;
 
 use Hanson\Foundation\Foundation;
+use Psr\Http\Message\ResponseInterface;
 use Qbhy\AcrCloud\Resources\Audio;
 use Qbhy\AcrCloud\Resources\Bucket;
 use Qbhy\AcrCloud\Resources\Channel;
@@ -29,4 +30,28 @@ class AcrCloud extends Foundation
     protected $providers = [
         AcrServiceProvider::class,
     ];
+
+    /**
+     * @param ResponseInterface $response
+     * @return array|null
+     */
+    public static function decodeResponse(ResponseInterface $response)
+    {
+        return @json_decode($response->getBody()->__toString(), true);
+    }
+
+    public function getHost()
+    {
+        return $this->app->getConfig('console_host');
+    }
+
+    public function getAccessKey()
+    {
+        return $this->app->getConfig('console_access_key');
+    }
+
+    public function getSecretKey()
+    {
+        return $this->app->getConfig('console_secret_key');
+    }
 }

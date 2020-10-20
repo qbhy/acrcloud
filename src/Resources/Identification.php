@@ -14,20 +14,13 @@ class Identification extends Api
      */
     public function query($sample, $title)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->upload('/v1/identify', [], ['sample' => $sample], [
                 'data_type'    => $this->dataType,
                 'sample_bytes' => filesize($sample),
                 'title'        => $title,
             ])
         );
-    }
-
-    public function handleAuthMetadata(array &$options, array $authMetadata)
-    {
-        foreach ($authMetadata as $name => $contents) {
-            $options['multipart'][] = compact('name', 'contents');
-        }
     }
 
     public function use($project)

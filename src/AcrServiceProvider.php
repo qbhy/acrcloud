@@ -37,5 +37,8 @@ class AcrServiceProvider implements ServiceProviderInterface
         $pimple['project']          = function (AcrCloud $acrCloud) {
             return new Project($acrCloud);
         };
+        $pimple['http']          = function (AcrCloud $acrCloud) {
+            return new Http($acrCloud);
+        };
     }
 }

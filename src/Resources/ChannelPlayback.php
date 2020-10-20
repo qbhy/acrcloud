@@ -14,7 +14,7 @@ class ChannelPlayback extends Api
      */
     public function upload($channel, $time, $bucket)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->post('/v1/channel-timeshift', [
                 'channel_id' => $channel,
                 'time'       => $time,
@@ -30,7 +30,7 @@ class ChannelPlayback extends Api
      */
     public function find($channel)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/channel-timeshift/' . $channel)
         );
     }
@@ -42,7 +42,7 @@ class ChannelPlayback extends Api
      */
     public function findTimeShift($stream)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v2/lost-timeshift/' . $stream)
         );
     }
@@ -53,7 +53,7 @@ class ChannelPlayback extends Api
      */
     public function delete($channel)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->delete('/v1/channel-timeshift/' . $channel)
         );
     }
@@ -65,7 +65,7 @@ class ChannelPlayback extends Api
      */
     public function getAll($bucket)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get("/v1/buckets/{$bucket}/channels")
         );
     }

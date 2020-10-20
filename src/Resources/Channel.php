@@ -15,7 +15,7 @@ class Channel extends Api
      */
     public function upload($title, $channelId, $bucket, $extras = [])
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->post('/v1/channels/', [
                 'channel_id'   => $channelId,
                 'title'        => $title,
@@ -33,7 +33,7 @@ class Channel extends Api
      */
     public function find($acrId)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/channels/' . $acrId)
         );
     }
@@ -44,7 +44,7 @@ class Channel extends Api
      */
     public function delete($acrId)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->delete('/v1/channels/' . $acrId)
         );
     }
@@ -56,7 +56,7 @@ class Channel extends Api
      */
     public function getAll($bucket)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/channels/' . $bucket . '/channels')
         );
     }

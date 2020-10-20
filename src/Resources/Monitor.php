@@ -17,7 +17,7 @@ class Monitor extends Api
      */
     public function add($url, $stream, $project, bool $realtime, bool $record, $region = 'ap-southeast-1')
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->post('/v1/monitor-streams', [
                 'url'          => $url,
                 'stream_name'  => $stream,
@@ -40,7 +40,7 @@ class Monitor extends Api
      */
     public function update($id, $url, $stream, bool $realtime, bool $record, $region = 'ap-southeast-1')
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->post('/v1/monitor-streams/' . $id, [
                 'url'         => $url,
                 'stream_name' => $stream,
@@ -58,7 +58,7 @@ class Monitor extends Api
      */
     public function getAll($project)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/monitor-streams', ['project_name' => $project])
         );
     }
@@ -70,7 +70,7 @@ class Monitor extends Api
      */
     public function find($id)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->get('/v1/monitor-streams/' . $id)
         );
     }
@@ -81,7 +81,7 @@ class Monitor extends Api
      */
     public function delete($id)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->delete('/v1/monitor-streams/' . $id)
         );
     }
@@ -93,7 +93,7 @@ class Monitor extends Api
      */
     public function action($id, $action)
     {
-        return self::decodeResponse(
+        return $this->app->decodeResponse(
             $this->getHttp()->request('PUT', '/v1/monitor-streams/' . $id . '/' . $action)
         );
     }
