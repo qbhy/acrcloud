@@ -10,7 +10,17 @@ namespace Qbhy\AcrCloud;
  */
 class Http extends \Hanson\Foundation\Http
 {
+    protected $app;
+
     private $signatureVersion = '1';
+
+    /**
+     * @param AcrCloud $app
+     */
+    public function __construct(AcrCloud $app)
+    {
+        $this->app = $app;
+    }
 
     public function getDataTypeString($dataType = null)
     {

@@ -4,6 +4,7 @@ namespace Qbhy\AcrCloud;
 
 use GuzzleHttp\Client;
 use Hanson\Foundation\AbstractAPI;
+use Hanson\Foundation\Foundation;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -14,6 +15,13 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class Api extends AbstractAPI
 {
+    protected $app;
+
+    public function __construct(AcrCloud $app)
+    {
+        $this->app = $app;
+    }
+
     protected $dataType;
 
     public function getDataType()

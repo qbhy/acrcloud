@@ -23,7 +23,8 @@
     }
   },
   "require-dev": {
-    "laravel/framework": "^6.0"
+    "laravel/framework": "^6.0",
+    "phpunit/phpunit": "^9.5"
   },
   "extra": {
     "laravel": {

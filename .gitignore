@@ -2,3 +2,5 @@
 composer.lock
 example.php
 .idea
+.phpunit.result.cache
+.env
