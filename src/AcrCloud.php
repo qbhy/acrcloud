@@ -42,16 +42,19 @@ class AcrCloud extends Foundation
 
     public function getHost()
     {
-        return $this->config['console_host'];
+        $config = $this->getConfig();
+        return $config['project'][$config['use']]['host'];
     }
 
     public function getAccessKey()
     {
-        return $this->config['console_access_key'];
+        $config = $this->getConfig();
+        return $config['project'][$config['use']]['access_key'];
     }
 
     public function getSecretKey()
     {
-        return $this->config['console_secret_key'];
+        $config = $this->getConfig();
+        return $config['project'][$config['use']]['secret_key'];
     }
 }

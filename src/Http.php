@@ -24,19 +24,22 @@ class Http extends \Hanson\Foundation\Http
 
     public function getDataTypeString($dataType = null)
     {
-        return $dataType ? $dataType."\n" : '';
+        return $dataType ? $dataType . "\n" : '';
     }
 
     public function request($method, $url, $options = [])
     {
         $method = strtoupper($method);
+
         $accessKey = $this->app->getAccessKey();
         $secretKey = $this->app->getSecretKey();
+        $host = $this->app->getHost();
+
         $timestamp = time();
         $uri = $url;
         $signatureVersion = $this->signatureVersion;
         $dataType = ($options['multipart'] ?? [])['data_type'] ?? null;
-        $signatureString = $method."\n".$uri."\n".$accessKey."\n".$this->getDataTypeString($dataType).$signatureVersion."\n".$timestamp;
+        $signatureString = $method . "\n" . $uri . "\n" . $accessKey . "\n" . $this->getDataTypeString($dataType) . $signatureVersion . "\n" . $timestamp;
         $signature = base64_encode(hash_hmac("sha1", $signatureString, $secretKey, true));
 
         $authMetadata = [
@@ -62,7 +65,7 @@ class Http extends \Hanson\Foundation\Http
         }
 
 
-        return parent::request($method, $this->app->getHost().$url, $options);
+        return parent::request($method, $host . $url, $options);
     }
 
     public function delete($url, array $options = [])

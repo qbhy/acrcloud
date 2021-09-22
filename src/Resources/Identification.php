@@ -14,7 +14,7 @@ class Identification extends Api
      */
     public function query($sample, $title)
     {
-        return $this->app->decodeResponse(
+        return $this->use('music')->app->decodeResponse(
             $this->getHttp()->upload('/v1/identify', [], ['sample' => $sample], [
                 'data_type'    => $this->dataType,
                 'sample_bytes' => filesize($sample),
@@ -36,23 +36,5 @@ class Identification extends Api
         ]));
 
         return $this;
-    }
-
-    public function getHost()
-    {
-        $config = $this->app->getConfig();
-        return $config['project'][$config['use']]['host'];
-    }
-
-    public function getAccessKey()
-    {
-        $config = $this->app->getConfig();
-        return $config['project'][$config['use']]['access_key'];
-    }
-
-    public function getSecretKey()
-    {
-        $config = $this->app->getConfig();
-        return $config['project'][$config['use']]['secret_key'];
     }
 }
