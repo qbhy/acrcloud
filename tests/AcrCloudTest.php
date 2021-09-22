@@ -10,7 +10,7 @@ class AcrCloudTest extends TestCase
         $app = new AcrCloud($config = [
             'debug' => true,
             // console API
-            'console_host' => 'https://cn-api.acrcloud.com',
+            'console_host' => env('ACR_CONSOLE_HOST'),
             'console_access_key' => env('ACR_CONSOLE_ACCESS_KEY'),
             'console_secret_key' => env('ACR_CONSOLE_SECRET_KEY'),
 
@@ -19,7 +19,7 @@ class AcrCloudTest extends TestCase
             // identification API
             'project' => [
                 'music' => [
-                    'host' => env('ACR_MUSIC_HOST', 'https://identify-cn-north-1.acrcloud.com'),
+                    'host' => env('ACR_MUSIC_HOST'),
                     'access_key' => env('ACR_MUSIC_ACCESS_KEY'),
                     'secret_key' => env('ACR_MUSIC_SECRET_KEY'),
                 ]
@@ -40,5 +40,7 @@ class AcrCloudTest extends TestCase
         @unlink($filename);
 
         $this->assertTrue(is_array($result));
+
+        dump($result);
     }
 }
