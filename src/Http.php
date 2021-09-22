@@ -2,6 +2,8 @@
 
 namespace Qbhy\AcrCloud;
 
+use GuzzleHttp\RequestOptions;
+
 /**
  * Class Http
  *
@@ -27,6 +29,20 @@ class Http extends \Hanson\Foundation\Http
         return $dataType ? $dataType . "\n" : '';
     }
 
+    public function parseDataType(array $options)
+    {
+        if (isset(($options[RequestOptions::QUERY] ?? [])['data_type'])) {
+            return $options[RequestOptions::QUERY]['data_type'];
+        }
+        if (isset(($options[RequestOptions::FORM_PARAMS] ?? [])['data_type'])) {
+            return $options[RequestOptions::FORM_PARAMS]['data_type'];
+        }
+        if (isset(($options[RequestOptions::JSON] ?? [])['data_type'])) {
+            return $options[RequestOptions::JSON]['data_type'];
+        }
+        return (collect($options['multipart'])->where('name', 'data_type')->first() ?? [])['contents'] ?? null;
+    }
+
     public function request($method, $url, $options = [])
     {
         $method = strtoupper($method);
@@ -38,7 +54,7 @@ class Http extends \Hanson\Foundation\Http
         $timestamp = time();
         $uri = $url;
         $signatureVersion = $this->signatureVersion;
-        $dataType = ($options['multipart'] ?? [])['data_type'] ?? null;
+        $dataType = $this->parseDataType($options);
         $signatureString = $method . "\n" . $uri . "\n" . $accessKey . "\n" . $this->getDataTypeString($dataType) . $signatureVersion . "\n" . $timestamp;
         $signature = base64_encode(hash_hmac("sha1", $signatureString, $secretKey, true));
 
@@ -48,6 +64,7 @@ class Http extends \Hanson\Foundation\Http
             'signature-version' => $signatureVersion,
             'timestamp' => $timestamp,
         ];
+
 
         if ($dataType) {
             $authMetadata = [
